@@ -13,7 +13,8 @@ RUN dotnet publish Pakkasyohaaste.sln -c Release -o out
 # Build runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:5.0.2-alpine3.12
 WORKDIR /app
-ENV ASPNETCORE_ENVIRONMENT="Production"
+ENV ASPNETCORE_ENVIRONMENT=Production
 ENV NO_SSL=1
 COPY --from=build-env /app/out .
+COPY adventti-b8b91cacef88.json /app/
 ENTRYPOINT ["dotnet", "./Pakkasyohaaste.dll"]
